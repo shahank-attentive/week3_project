@@ -13,7 +13,8 @@ Details needed from the API:
     6. Get all the device information of a particular device type along with the user having it.
     7. Switch the devices between two employees.
     8. Updating, deleting the details of an employee or device.
-    9. Search a user or device with name(not exact match), device type, email address.10. Get the history of a particular device or employee.
+    9. Search a user or device with name(not exact match), device type, email address
+    10. Get the history of a particular device or employee.
     
     
 Deployed GET, POST, PATCH and DELETE API's to handle all the cases required.
