@@ -21,6 +21,12 @@ class Device(models.Model):
         return self.name
 
 
+# class History(models.Model):
+#     e_name = models.ForeignKey(Employee, on_delete=models.CASCADE)
+#     list_of_devices = models.TextField(null=True)
+#     d_name = models.ForeignKey(Device, on_delete=models.CASCADE)
+
+
 # class Change(models.Model):
 #     emp = models.ForeignKey(Employee, on_delete=models.CASCADE)
 #     changed_field = models.CharField("field_name", max_length=200)
