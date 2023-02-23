@@ -23,7 +23,7 @@ Deployed GET, POST, PATCH and DELETE API's to handle all the cases required.
 
 I made a basic todo app here The first thing to do is to clone the repository:
 
-        $ git clone https://github.com/shahank-attentive/todoproject.git
+        $ git clone https://github.com/shahank-attentive/week3_project.git
 Create a virtual environment to install dependencies in and activate it:
 
          $ pip install virtualenv
