@@ -21,10 +21,11 @@ class Device(models.Model):
         return self.name
 
 
-# class History(models.Model):
-#     e_name = models.ForeignKey(Employee, on_delete=models.CASCADE)
-#     list_of_devices = models.TextField(null=True)
-#     d_name = models.ForeignKey(Device, on_delete=models.CASCADE)
+class History(models.Model):
+    d_name = models.ForeignKey(Device, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 # class Change(models.Model):
