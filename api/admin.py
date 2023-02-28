@@ -11,7 +11,12 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ["id", "name", "model", "current_user"]
+    list_display = ["id", "name", "model"]
 
-    # def current_user_name(self, instance):
-    #     return instance.current_user.name
+
+# @admin.register(History)
+# class DeviceHistoryAdmin(admin.ModelAdmin):
+#     list_display = ["id", "name", "user", "timestamp"]
+
+# def current_user_name(self, instance):
+#     return instance.current_user.name
