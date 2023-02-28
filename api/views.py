@@ -70,6 +70,14 @@ class DeviceHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DeviceHistorySerializer
     filterset_fields = "__all__"
 
+    def devicehistory(request, pk):
+        abc = Device.history.filter(id=pk)  # use filter instead of get
+        # print("abc", abc)
+        serializer = DeviceHistorySerializer(
+            abc, many="True", context={"request": request}
+        )
+        return JsonResponse(serializer.data, safe=False)
+
 
 class EmployeeHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Employee.history.all()
@@ -77,8 +85,10 @@ class EmployeeHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_fields = "__all__"
 
 
-def devhistory(request, pk):
-    abc = Device.history.filter(id=pk)  # stu->model object
-    print("abc", abc)
-    serializer = DeviceHistorySerializer(abc, many="True", context={"request": request})
-    return JsonResponse(serializer.data, safe=False)
+# by setting many=True you tell drf that queryset contains mutiple items (a list of items)
+# so drf needs to serialize each item with serializer class (and serializer.data will be a list)
+
+# he JSON Response in Django set save=True by default, and the safe parameter as a data influencer
+# makes JSON accept the Python Data-Type {Dictionaries} and nothing less.
+
+# make it to safe=False for non dict type data
