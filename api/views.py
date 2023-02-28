@@ -12,6 +12,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.db.models import Model
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -74,3 +75,10 @@ class EmployeeHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Employee.history.all()
     serializer_class = EmployeeHistorySerializer
     filterset_fields = "__all__"
+
+
+def devhistory(request, pk):
+    abc = Device.history.filter(id=pk)  # stu->model object
+    print("abc", abc)
+    serializer = DeviceHistorySerializer(abc, many="True", context={"request": request})
+    return JsonResponse(serializer.data, safe=False)
