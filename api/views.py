@@ -70,7 +70,7 @@ class DeviceHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DeviceHistorySerializer
     filterset_fields = "__all__"
 
-    def devicehistory(request, pk):
+    def devhistory(request, pk):
         abc = Device.history.filter(id=pk)  # use filter instead of get
         # print("abc", abc)
         serializer = DeviceHistorySerializer(
