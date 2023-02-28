@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Employee, Device, History
+from .models import Employee, Device
 
 
 @admin.register(Employee)
@@ -11,12 +11,12 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ["id", "name", "model", "current_user"]
+    list_display = ["id", "name", "model"]
 
 
-@admin.register(History)
-class HistoryAdmin(admin.ModelAdmin):
-    list_display = ["id", "d_name"]
+# @admin.register(History)
+# class DeviceHistoryAdmin(admin.ModelAdmin):
+#     list_display = ["id", "name", "user", "timestamp"]
 
-    # def current_user_name(self, instance):
-    #     return instance.current_user.name
+# def current_user_name(self, instance):
+#     return instance.current_user.name

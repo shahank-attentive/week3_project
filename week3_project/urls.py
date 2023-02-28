@@ -7,7 +7,8 @@ router = DefaultRouter()
 
 router.register("employeeapi", views.EmployeeModelViewSet)
 router.register("deviceapi", views.DeviceModelViewSet)
-router.register("devicehistory", views.HistoryModelViewSet)
+router.register("employeehistory", views.EmployeeHistoryModelViewSet)
+router.register("devicehistory", views.DeviceHistoryModelViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
