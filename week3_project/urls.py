@@ -13,5 +13,5 @@ router.register("devicehistory", views.DeviceHistoryModelViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(router.urls)),
-    path("devhistory/<int:pk>", views.devhistory),
+    path("devhistory/<int:pk>", views.DeviceHistoryModelViewSet.devicehistory),
 ]
