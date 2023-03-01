@@ -9,11 +9,20 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class DeviceSerializer(serializers.HyperlinkedModelSerializer):
-    current_user = EmployeeSerializer(many=True)
+    current_user = EmployeeSerializer(many=False)
 
     class Meta:
         model = Device
         fields = ["id", "name", "model", "current_user"]
+
+    # def create(self, validated_data):
+    #     data = validated_data.get("current_user")
+    #     print(data)
+    #     serializer = DeviceSerializer(data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+
+    #     return Device.objects.create(**validated_data)
 
 
 class HistorySerializer(serializers.HyperlinkedModelSerializer):
