@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils import timezone
-import uuid
 
-from simple_history.models import HistoricalRecords
+# from simple_history.models import HistoricalRecords
 
 
 # Create your models here.
@@ -10,7 +9,7 @@ class Employee(models.Model):
     name = models.CharField(max_length=200)
     employee_id = models.IntegerField()
     email_id = models.CharField(max_length=60)
-    history = HistoricalRecords()
+    # history = HistoricalRecords()
 
     def __str__(self):
         return self.name
@@ -19,17 +18,18 @@ class Employee(models.Model):
 class Device(models.Model):
     name = models.CharField(max_length=200)
     model = models.CharField(max_length=200)
-    current_user = models.ForeignKey(Employee, null=True, on_delete=models.CASCADE)
-    history = HistoricalRecords()
+    current_user = models.ManyToManyField(Employee, through="History")
+    # history = HistoricalRecords()
 
     def __str__(self):
         return self.name
 
 
-# class DeviceHistory(models.Model):
-#     name = models.ForeignKey(Device, on_delete=models.CASCADE)
-#     user = models.ForeignKey(Employee, null=True, on_delete=models.CASCADE)
-#     timestamp = timezone.now()
+class History(models.Model):
+    dev = models.ForeignKey(Device, on_delete=models.CASCADE)
+    emp = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    time = models.DateTimeField()
+
 
 # def __str__(self):
 #     return self.name

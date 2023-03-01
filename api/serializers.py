@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Employee, Device
+from .models import Employee, Device, History
 
 
 class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
@@ -9,22 +9,28 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class DeviceSerializer(serializers.HyperlinkedModelSerializer):
-    # h_serializer = HistorySerializer(many=True)
+    current_user = EmployeeSerializer(many=True)
 
     class Meta:
         model = Device
         fields = ["id", "name", "model", "current_user"]
 
 
-class EmployeeHistorySerializer(serializers.HyperlinkedModelSerializer):
+class HistorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Employee.history.model
-        fields = "__all__"
-        write_only_feilds = ()
+        model = History
+        fields = ["id", "emp", "dev", "time"]
 
 
-class DeviceHistorySerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Device.history.model
-        fields = "__all__"
-        # read_only_fields = ["id", "name", "employee_id", "email_id"]
+# class EmployeeHistorySerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Employee.history.model
+#         fields = "__all__"
+#         write_only_feilds = ()
+
+
+# class DeviceHistorySerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Device.history.model
+#         fields = "__all__"
+#         # read_only_fields = ["id", "name", "employee_id", "email_id"]

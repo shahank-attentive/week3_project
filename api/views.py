@@ -1,17 +1,9 @@
 from django.shortcuts import render
-from .models import Employee, Device
-from .serializers import (
-    EmployeeSerializer,
-    DeviceSerializer,
-    EmployeeHistorySerializer,
-    DeviceHistorySerializer,
-)
+from .models import Employee, Device, History
+from .serializers import EmployeeSerializer, DeviceSerializer, HistorySerializer
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.response import Response
-from django.db.models import Model
 from django.http import JsonResponse
 
 
@@ -33,6 +25,11 @@ class DeviceModelViewSet(viewsets.ModelViewSet):
         "=model",
         "current_user__name",
     ]  # Here we want exact match for model so '='
+
+
+class HistoryModelViewSet(viewsets.ModelViewSet):
+    queryset = History.objects.all()
+    serializer_class = HistorySerializer
 
     # def history(self):
     #     return Device.history.all()
@@ -65,24 +62,24 @@ class DeviceModelViewSet(viewsets.ModelViewSet):
     #     return super().create(request, *args, **kwargs)
 
 
-class DeviceHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Device.history.all()
-    serializer_class = DeviceHistorySerializer
-    filterset_fields = "__all__"
+# class DeviceHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = Device.history.all()
+#     serializer_class = DeviceHistorySerializer
+#     filterset_fields = "__all__"
 
-    def devhistory(request, pk):
-        abc = Device.history.filter(id=pk)  # use filter instead of get
-        # print("abc", abc)
-        serializer = DeviceHistorySerializer(
-            abc, many="True", context={"request": request}
-        )
-        return JsonResponse(serializer.data, safe=False)
+#     def devhistory(request, pk):
+#         abc = Device.history.filter(id=pk)  # use filter instead of get
+#         # print("abc", abc)
+#         serializer = DeviceHistorySerializer(
+#             abc, many="True", context={"request": request}
+#         )
+#         return JsonResponse(serializer.data, safe=False)
 
 
-class EmployeeHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Employee.history.all()
-    serializer_class = EmployeeHistorySerializer
-    filterset_fields = "__all__"
+# class EmployeeHistoryModelViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = Employee.history.all()
+#     serializer_class = EmployeeHistorySerializer
+#     filterset_fields = "__all__"
 
 
 # by setting many=True you tell drf that queryset contains mutiple items (a list of items)
