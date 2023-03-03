@@ -25,9 +25,18 @@ class Device(models.Model):
         return self.name
 
 
+class Status(models.Model):
+    dev = models.ForeignKey(Device, on_delete=models.CASCADE)
+    emp = models.ForeignKey(Employee, null=True, on_delete=models.CASCADE)
+    time = models.DateTimeField()
+
+    # class Meta:
+    #     unique_together = ("dev", "emp")
+
+
 class History(models.Model):
     dev = models.ForeignKey(Device, on_delete=models.CASCADE)
-    emp = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    emp = models.ForeignKey(Employee, null=True, on_delete=models.CASCADE)
     time = models.DateTimeField()
 
 

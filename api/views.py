@@ -1,6 +1,11 @@
 from django.shortcuts import render
-from .models import Employee, Device, History
-from .serializers import EmployeeSerializer, DeviceSerializer, HistorySerializer
+from .models import Employee, Device, History, Status
+from .serializers import (
+    EmployeeSerializer,
+    DeviceSerializer,
+    HistorySerializer,
+    StatusSerializer,
+)
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 
@@ -25,6 +30,11 @@ class DeviceModelViewSet(viewsets.ModelViewSet):
         "=model",
         "current_user__name",
     ]  # Here we want exact match for model so '='
+
+
+class StatusModelViewSet(viewsets.ModelViewSet):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
 
 
 class HistoryModelViewSet(viewsets.ModelViewSet):
